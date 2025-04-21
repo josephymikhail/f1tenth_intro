@@ -21,18 +21,27 @@ find_package(rclcpp REQUIRED)
 find_package(sensor_msgs REQUIRED)
 find_package(tf2_ros REQUIRED)
 find_package(geometry_msgs REQUIRED)
+find_package(nav_msgs REQUIRED)
+find_package(ackermann_msgs REQUIRED)
+#find_package(rclpy REQUIRED)
+#find_package(python3 REQUIRED)
 # uncomment the following section in order to fill in
 # further dependencies manually.
 # find_package(<dependency> REQUIRED)
 
 add_executable(line_following_node src/line_following_node.cpp)
+add_executable(plot_error src/plot_error.cpp)
 
-ament_target_dependencies(line_following_node rclcpp sensor_msgs tf2_ros geometry_msgs)
+ament_target_dependencies(line_following_node rclcpp sensor_msgs tf2_ros geometry_msgs ackermann_msgs nav_msgs)
+ament_target_dependencies(plot_error rclcpp std_msgs)
 
 install(TARGETS
   line_following_node
+  plot_error
   DESTINATION lib/${PROJECT_NAME}
   )
+
+
 
 if(BUILD_TESTING)
   find_package(ament_lint_auto REQUIRED)
